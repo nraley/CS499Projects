@@ -2,6 +2,8 @@
 // Licensed under the Apache 2.0 License
 
 
+import java.lang.reflect.Type;
+
 /**
    A superclass for oscillators.  This basic class performs a simple ramp-style oscillation 
    from 0...1 through the period of the wave.  You could use the tick value to compute more
@@ -20,12 +22,14 @@ public class LFO extends Osc
 
     public int getType()
     	{
-    	// implement me
+    	    // implement me
+            return type;
     	}
     	
     public void setType(int type) 
     	{
-    	// implement me
+    	    // implement me
+            this.type = type;
     	}
     
     public Options getOptions()
@@ -43,6 +47,9 @@ public class LFO extends Osc
     public double tick(long tickCount) 
         {
         // Implement Me
+            double yValue = super.tick(tickCount);
+            double sineValue = Math.sin(yValue * 2 * Math.PI);
+            return (sineValue + 1)/2;
         }
     
     }
