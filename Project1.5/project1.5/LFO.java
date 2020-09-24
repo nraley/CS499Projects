@@ -27,9 +27,17 @@ public class LFO extends Osc
     	}
     	
     public void setType(int type) 
-    	{
+    	this.type = type;
+    	{	
+    	switch (type) {
+        case 1: type = LFO_TYPE_RAMP; break;
+        case 2: type = LFO_TYPE_SAW; break;
+        case 3: type = LFO_TYPE_SQUARE; break;
+        case 4: type = LFO_TYPE_TRIANGLE; break;
+        case 0: type = LFO_TYPE_SINE; break;
+    }
     	    // implement me
-            this.type = type;
+            
     	}
     
     public Options getOptions()
