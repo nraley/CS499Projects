@@ -5,9 +5,6 @@
 import java.lang.reflect.Type;
 
 /**
-   A superclass for oscillators.  This basic class performs a simple ramp-style oscillation 
-   from 0...1 through the period of the wave.  You could use the tick value to compute more
-   useful oscillation functions in subclasses.
 */
  
 public class LFO extends Osc 
@@ -19,6 +16,7 @@ public class LFO extends Osc
     public static final int LFO_TYPE_SQUARE = 3;
     public static final int LFO_TYPE_TRIANGLE = 4;    
     int type = LFO_TYPE_SINE;
+    public Osc waveform = new Sine();
 
     public int getType()
     	{
@@ -26,18 +24,24 @@ public class LFO extends Osc
             return type;
     	}
     	
-    public void setType(int type) 
-    	this.type = type;
-    	{	
-    	switch (type) {
-        case 1: type = LFO_TYPE_RAMP; break;
-        case 2: type = LFO_TYPE_SAW; break;
-        case 3: type = LFO_TYPE_SQUARE; break;
-        case 4: type = LFO_TYPE_TRIANGLE; break;
-        case 0: type = LFO_TYPE_SINE; break;
-    }
-    	    // implement me
-            
+    public void setType(int type)
+    	{
+            this.type = type;
+            switch (type) {     //switch statement to hook up drop down menu items to waveformsf
+                case LFO_TYPE_SINE:
+                    this.waveform = new Sine();
+                    break;
+                case LFO_TYPE_RAMP:
+                    this.waveform = new Ramp();
+                    break;
+                case LFO_TYPE_SQUARE:
+                    this.waveform = new Square();
+                    break;
+                case LFO_TYPE_SAW:
+                    this.waveform = new Sawtooth();
+                    break;
+            }
+            waveform.setFrequencyMod(this.getFrequencyMod());
     	}
     
     public Options getOptions()
@@ -51,13 +55,17 @@ public class LFO extends Osc
                 }
     		};
     	}
-    	
-    public double tick(long tickCount) 
-        {
-        // Implement Me
-            double yValue = super.tick(tickCount);
-            double sineValue = Math.sin(yValue * 2 * Math.PI);
-            return (sineValue + 1)/2;
+
+        @Override
+        public void setFrequencyMod(Module frequencyMod) {
+            super.setFrequencyMod(frequencyMod);
+            waveform.setFrequencyMod(frequencyMod);
         }
-    
+
+        public double tick(long tickCount)
+        {
+            super.tick(tickCount);
+            waveform.doUpdate(tickCount);
+            return waveform.getValue();
+        }
     }

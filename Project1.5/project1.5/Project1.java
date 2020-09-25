@@ -152,6 +152,8 @@ public class Project1 extends Synth
 			Dial amplitudeDial = new Dial(1.0);
 			lfoBox.add(amplitudeDial.getLabelledDial("Amplitude"));
 
+			lfoBox.add(lfo.getOptions());	//Drop down menu for wave shapes
+
 			Mul volMul = new Mul();
 			volMul.setInput(lfo);
 			volMul.setMultiplier(amplitudeDial.getModule());
