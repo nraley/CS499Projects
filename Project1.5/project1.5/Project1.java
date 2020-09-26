@@ -101,9 +101,17 @@ public class Project1 extends Synth
 			envBox.add(releaseDial.getLabelledDial("Release Time"));
 
 			//ADSR
+			ADSR adsr = new ADSR();
+			adsr.setAttackTime(attackDial.getModule());
+			adsr.setDecayTime(decayDial.getModule());
+			adsr.setSustainLevel(sustainDial.getModule());
+			adsr.setReleaseTime(releaseDial.getModule());
+			adsr.setGate(gate);
+			modules.add(adsr);
 
+			
 			Amplifier AAA = new Amplifier();
-			AAA.setAmplitudeMod(new Constant(1));
+			AAA.setAmplitudeMod(adsr);
 			AAA.setInput(hammond);
 			modules.add(AAA);
 
@@ -180,13 +188,13 @@ public class Project1 extends Synth
 			Dial dial = new Dial(1.0);
 			outputBox.add(dial.getLabelledDial("Gain"));
 
-			Amplifier gatedAmp = new Amplifier();
+			/*Amplifier gatedAmp = new Amplifier();
 			gatedAmp.setInput(BBB);
-			gatedAmp.setAmplitudeMod(gate);
-			modules.add(gatedAmp);
+			gatedAmp.setAmplitudeMod(gate);		//disabled gatedAmp in order to properly trigger the release in adsr
+			modules.add(gatedAmp);*/
 
 			Amplifier gainAmp = new Amplifier();
-			gainAmp.setInput(gatedAmp);
+			gainAmp.setInput(BBB);
 			gainAmp.setAmplitudeMod(dial.getModule());
 			modules.add(gainAmp);
 
