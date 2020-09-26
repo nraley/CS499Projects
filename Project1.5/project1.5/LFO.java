@@ -27,7 +27,7 @@ public class LFO extends Osc
     public void setType(int type)
     	{
             this.type = type;
-            switch (type) {     //switch statement to hook up drop down menu items to waveformsf
+            switch (type) {     //switch statement to hook up drop down menu items to waveforms
                 case LFO_TYPE_SINE:
                     this.waveform = new Sine();
                     break;
@@ -39,6 +39,9 @@ public class LFO extends Osc
                     break;
                 case LFO_TYPE_SAW:
                     this.waveform = new Sawtooth();
+                    break;
+                case LFO_TYPE_TRIANGLE:
+                    this.waveform = new Triangle();
                     break;
             }
             waveform.setFrequencyMod(this.getFrequencyMod());
