@@ -1,11 +1,11 @@
 PROJECT 2 (Part 1).  Oscillators using BLIT.   You will create several BLIT-based oscillators, mix them,
 and feed them through an ADSR-based amplifier. You'll reuse your previous ADSR.  To do this you will:
 
-	1. Build a module class called Blit.java
-	2. Build a module class called BPBlit.java
-	3. Build a module class called BlitSquare.java
+	1. Build a module class called Blit.java (DONE)
+	2. Build a module class called BPBlit.java (DONE)
+	3. Build a module class called BlitSquare.java (DONE)
 	4. Build a module class called BlitTriangle.java
-	5. Build a module class called BlitSaw.java
+	5. Build a module class called BlitSaw.java (DONE)
 	6. Modify the Project2 setup() method
 
 This is PART 1 of the project.  PART 2 will introduce a filter and possibly an additional ADSR.
