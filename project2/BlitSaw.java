@@ -17,7 +17,7 @@ public class BlitSaw extends Blit
     	 // clamp so we don't get INF below
         double P  = Config.SAMPLING_RATE / blitsaw(tickCount);
         double alpha = 1 - 1/P;
-        double val = alpha*prev + super.tick(tickCount) - 1/P;
+        double val = alpha*prev + super.blit(tickCount, prev) - 1/P;
         prev = val;
         val += 0.5;
         return val;

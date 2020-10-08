@@ -1,14 +1,13 @@
 public class Blit extends Osc {
 	public double sincm(double x, double m) {
 		/// IMPLEMENT ME
-		double v = m * Math.sin((Math.PI * x )/ m);
+		double v = m * Math.sin(Math.PI * x / m);
 		if (v == 0)
 			return 1;
 		return Math.sin(Math.PI * x) / v;
 	}
 
-	public double tick(long tickCount) {	//probably unnecessary, and possibly problematic ticking
-		super.tick(tickCount);
+	public double tick(long tickCount) {
 		return blit(tickCount, 0);
 	}
 
@@ -16,16 +15,14 @@ public class Blit extends Osc {
 	/// What might be able to take advantage of this function?
 
 	protected double blit(long tickCount, double d) {
-		//double phase = super.tick(tickCount);
+		double phase = super.tick(tickCount);
 
 		double freq = Utils.valueToHz(getFrequencyMod().getValue());
 		if (freq < 0.001)
 			freq = 0.001;
 
 		double p = Config.SAMPLING_RATE / freq;
-
 		double m = Math.floor(p / 2.0) * 2.0 - 1.0;
-		double x = tickCount - (d*p);
-		return (m / p) * sincm((tickCount - d * p) * m / p, m);
+		return (m / p) * sincm((phase * p - d * p) * m / p, m);
 	}
 }
