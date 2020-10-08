@@ -20,7 +20,7 @@ public class BPBlit extends Blit
     	 double hz = Utils.valueToHz(getFrequencyMod().getValue());
          hz = Math.min(Math.max(1.0, hz), Config.NYQUIST_LIMIT); // clamp so we don't get INF below
          double p = Config.SAMPLING_RATE / hz;
-         double val = super.tick(tickCount, d) - offPhaseBlit.tick(tickCount, p*(1.0-d));
+         double val = super.tick(tickCount) - offPhaseBlit.tick(tickCount);
          return val;
         }
 

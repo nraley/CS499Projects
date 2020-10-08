@@ -9,7 +9,7 @@ public class BlitSquare extends BPBlit {
 		double P = Config.SAMPLING_RATE / hz;
 		double alpha = 0.999;
 		double width = Math.min(Math.max(0, getPhaseMod().getValue()), 1);
-		double val = alpha * prev + super.tick(tickCount, width);
+		double val = alpha * prev + super.tick(tickCount);
 		prev = val;
 		// handle DC offset issue
 		val += 0.5;
@@ -22,7 +22,7 @@ public class BlitSquare extends BPBlit {
             return 0;
         else
             {
-            if (Utils.valueToHz(getFrequencyMod().getValue() == 0)
+            if (Utils.valueToHz(getFrequencyMod().getValue()) == 0.0)
                 {
                 return getValue();
                 }       

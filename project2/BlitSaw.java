@@ -6,8 +6,8 @@ public class BlitSaw extends Blit
 	public double blitsaw(long tickCount)
 		{
 		double bs = Utils.valueToHz(getFrequencyMod().getValue());
-		 bs  = Math.min(Math.max(1.0, hz), Config.NYQUIST_LIMIT);
-		 return bs
+		 bs  = Math.min(Math.max(1.0, bs), Config.NYQUIST_LIMIT);
+		 return bs;
 		/// IMPLEMENT ME
 		}
 		
@@ -17,9 +17,8 @@ public class BlitSaw extends Blit
     	 // clamp so we don't get INF below
         double P  = Config.SAMPLING_RATE / blitsaw(tickCount);
         double alpha = 1 - 1/P;
-        double val = alpha*prev + super.tick(tickCount, d) - 1/P;
+        double val = alpha*prev + super.tick(tickCount) - 1/P;
         prev = val;
-        // handle DC offset issue
         val += 0.5;
         return val;
         }

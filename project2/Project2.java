@@ -77,6 +77,14 @@ public class Project2 extends Synth
 		Dial releaseDial = new Dial(1.0);
 		envBox.add(releaseDial.getLabelledDial("Release Time"));
 		
+		blitSqr.setPhaseMod(sqrPulse.getModule());
+		blitTri.setPhaseMod(triPulse.getModule());
+		
+		modules.add(blit);
+		modules.add(blitSqr);
+		modules.add(blitSaw);
+		modules.add(blitTri);
+		modules.add(bpbLit);
     	// Build a mixer for the various oscillators
 		Mixer mixer = new Mixer(7);	//7 oscillators for the mixer
 		mixer.setInput(0, blit);
@@ -84,6 +92,12 @@ public class Project2 extends Synth
 		mixer.setInput(2, blitSqr);
 		mixer.setInput(3, blitTri);
 		mixer.setInput(4, bpbLit);
+		mixer.setAmplitudeMod(0, blitAmp.getModule());
+		mixer.setAmplitudeMod(1, sawAmp.getModule());
+		mixer.setAmplitudeMod(2, sqrAmp.getModule());
+		mixer.setAmplitudeMod(3, triAmp.getModule());
+		mixer.setAmplitudeMod(4, bpblitAmp.getModule());
+		
 		modules.add(mixer);
     	// Build an ADSR
 		ADSR adsr = new ADSR();
@@ -111,7 +125,6 @@ public class Project2 extends Synth
 		gainAmp.setInput(AAA);
 		gainAmp.setAmplitudeMod(dial.getModule());
 		modules.add(gainAmp);
-		
     	// Add an oscilloscope
 		Oscilloscope oscope = new Oscilloscope();
 		Oscilloscope.OModule omodule = oscope.getModule();
