@@ -24,17 +24,20 @@ public class Project2 extends Synth
 		Box outer = new Box(BoxLayout.X_AXIS);
 		frame.setContentPane(outer);
     	// Build the oscillators
+		
+		Box blitBox = new Box(BoxLayout.Y_AXIS);
+		blitBox.setBorder(BorderFactory.createTitledBorder("Blits"));
+		outer.add(blitBox);
+		
 		Blit blit = new Blit();
 		BlitSaw blitSaw = new BlitSaw();
 		BlitSquare blitSqr = new BlitSquare();
 		BPBlit bpbLit = new BPBlit();
 		BlitTriangle blitTri = new BlitTriangle();
-    	// Build dials for the amplitude of each of the oscillators, plus
+    	
+		// Build dials for the amplitude of each of the oscillators, plus
     	//       the pulse width of the square and triangle
     	// Put them in a box and put it in the window
-		Box blitBox = new Box(BoxLayout.Y_AXIS);
-		blitBox.setBorder(BorderFactory.createTitledBorder("Blits"));
-		outer.add(blitBox);
 		
 		Dial blitAmp = new Dial(1.0);
 		blitBox.add(blitAmp.getLabelledDial("Blit Amplitude"));
@@ -97,6 +100,11 @@ public class Project2 extends Synth
 		mixer.setAmplitudeMod(2, sqrAmp.getModule());
 		mixer.setAmplitudeMod(3, triAmp.getModule());
 		mixer.setAmplitudeMod(4, bpblitAmp.getModule());
+		blit.setFrequencyMod(midimod);
+		blitSaw.setFrequencyMod(midimod);
+		blitSqr.setFrequencyMod(midimod);
+		blitTri.setFrequencyMod(midimod);
+		bpbLit.setFrequencyMod(midimod);
 		
 		modules.add(mixer);
     	// Build an ADSR
