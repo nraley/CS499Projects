@@ -39,25 +39,25 @@ public class Project2 extends Synth
     	//       the pulse width of the square and triangle
     	// Put them in a box and put it in the window
 		
-		Dial blitAmp = new Dial(1.0);
+		Dial blitAmp = new Dial(0.0);
 		blitBox.add(blitAmp.getLabelledDial("Blit Amplitude"));
 
-		Dial bpblitAmp = new Dial(1.0);
+		Dial bpblitAmp = new Dial(0.0);
 		blitBox.add(bpblitAmp.getLabelledDial("BPBlit Amplitude"));
 
 		Dial sawAmp = new Dial(1.0);
 		blitBox.add(sawAmp.getLabelledDial("Saw Amplitude"));
 
-		Dial sqrAmp = new Dial(1.0);
+		Dial sqrAmp = new Dial(0.0);
 		blitBox.add(sqrAmp.getLabelledDial("Square Amplitude"));
 		
-		Dial sqrPulse = new Dial(1.0);
+		Dial sqrPulse = new Dial(0.5);
 		blitBox.add(sqrPulse.getLabelledDial("Square Pulse Width"));
 
-		Dial triAmp = new Dial(1.0);
+		Dial triAmp = new Dial(0.0);
 		blitBox.add(triAmp.getLabelledDial("Triangle Amplitude"));
 
-		Dial triPulse = new Dial(1.0);
+		Dial triPulse = new Dial(0.5);
 		blitBox.add(triPulse.getLabelledDial("Triangle Pulse Width"));
 
 		//box for envelope 
@@ -68,16 +68,16 @@ public class Project2 extends Synth
 		envBox.setBorder(BorderFactory.createTitledBorder("Env"));
 		centerBox.add(envBox);
 		
-		Dial attackDial = new Dial(1.0);
+		Dial attackDial = new Dial(0.1);
 		envBox.add(attackDial.getLabelledDial("Attack Time"));
 		
-		Dial decayDial = new Dial(1.0);
+		Dial decayDial = new Dial(0);
 		envBox.add(decayDial.getLabelledDial("Decay Time"));
 
 		Dial sustainDial = new Dial(1.0);
 		envBox.add(sustainDial.getLabelledDial("Sustain"));
 
-		Dial releaseDial = new Dial(1.0);
+		Dial releaseDial = new Dial(0.1);
 		envBox.add(releaseDial.getLabelledDial("Release Time"));
 		
 		blitSqr.setPhaseMod(sqrPulse.getModule());
