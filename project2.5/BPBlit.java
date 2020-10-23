@@ -17,7 +17,8 @@ public class BPBlit extends Blit
 
     protected double bpblit(long tickCount)
         {
-        // IMPLEMENT ME
+
+            return offPhaseBlit.tick(tickCount) - blit(tickCount, phaseMod.getValue());
         }
 
     public double tick(long tickCount) 
