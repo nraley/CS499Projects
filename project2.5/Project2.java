@@ -64,25 +64,64 @@ public class Project2 extends Synth
         Dial triPulse = new Dial(0.5);
         blitBox.add(triPulse.getLabelledDial("Triangle Pulse Width"));
 
-        //box for envelope
-        Box centerBox = new Box(BoxLayout.Y_AXIS);	//center box to hold Env
-        outer.add(centerBox);
+        //box for Filter envelope
+        Box secondBox = new Box(BoxLayout.Y_AXIS);
+        outer.add(secondBox);
 
-        Box envBox = new Box(BoxLayout.Y_AXIS);
-        envBox.setBorder(BorderFactory.createTitledBorder("Env"));
-        centerBox.add(envBox);
+        Box filterEnvBox = new Box(BoxLayout.Y_AXIS);
+        filterEnvBox.setBorder(BorderFactory.createTitledBorder("Filter Env"));
+        secondBox.add(filterEnvBox);
 
-        Dial attackDial = new Dial(0.1);
-        envBox.add(attackDial.getLabelledDial("Attack Time"));
+        //filter envelope dials
+        Dial filterAttackDial = new Dial(0.1);
+        filterEnvBox.add(filterAttackDial.getLabelledDial("Attack Time"));
 
-        Dial decayDial = new Dial(0);
-        envBox.add(decayDial.getLabelledDial("Decay Time"));
+        Dial filterDecayDial = new Dial(0);
+        filterEnvBox.add(filterDecayDial.getLabelledDial("Decay Time"));
 
-        Dial sustainDial = new Dial(1.0);
-        envBox.add(sustainDial.getLabelledDial("Sustain"));
+        Dial filterSustainDial = new Dial(1.0);
+        filterEnvBox.add(filterSustainDial.getLabelledDial("Sustain"));
 
-        Dial releaseDial = new Dial(0.1);
-        envBox.add(releaseDial.getLabelledDial("Release Time"));
+        Dial filterReleaseDial = new Dial(0.1);
+        filterEnvBox.add(filterReleaseDial.getLabelledDial("Release Time"));
+
+        //box for filter
+
+        Box thirdBox = new Box(BoxLayout.Y_AXIS);
+        outer.add(thirdBox);
+
+        Box filterBox = new Box(BoxLayout.Y_AXIS);
+        filterBox.setBorder(BorderFactory.createTitledBorder("Filter"));
+        thirdBox.add(filterBox);
+
+        //filter dials
+
+        Dial filterCutoffDial = new Dial(0.1);
+        filterBox.add(filterCutoffDial.getLabelledDial("Cutoff"));
+
+        Dial filterResonanceDial = new Dial(0.1);
+        filterBox.add(filterResonanceDial.getLabelledDial("Resonance"));
+
+        //box for amp envelope
+        Box fourthBox = new Box(BoxLayout.Y_AXIS);	//fourth box to hold Env
+        outer.add(fourthBox);
+
+        Box ampEnvBox = new Box(BoxLayout.Y_AXIS);
+        ampEnvBox.setBorder(BorderFactory.createTitledBorder("Amp Env"));
+        fourthBox.add(ampEnvBox);
+
+        //amp envelope dials
+        Dial ampAttackDial = new Dial(0.1);
+        ampEnvBox.add(ampAttackDial.getLabelledDial("Attack Time"));
+
+        Dial ampDecayDial = new Dial(0);
+        ampEnvBox.add(ampDecayDial.getLabelledDial("Decay Time"));
+
+        Dial ampSustainDial = new Dial(1.0);
+        ampEnvBox.add(ampSustainDial.getLabelledDial("Sustain"));
+
+        Dial ampReleaseDial = new Dial(0.1);
+        ampEnvBox.add(ampReleaseDial.getLabelledDial("Release Time"));
 
         blitSqr.setPhaseMod(sqrPulse.getModule());
         blitTri.setPhaseMod(triPulse.getModule());
@@ -116,10 +155,10 @@ public class Project2 extends Synth
 
         // Build an ADSR
         ADSR adsr = new ADSR();
-        adsr.setAttackTime(attackDial.getModule());
-        adsr.setDecayTime(decayDial.getModule());
-        adsr.setSustainLevel(sustainDial.getModule());
-        adsr.setReleaseTime(releaseDial.getModule());
+        adsr.setAttackTime(ampAttackDial.getModule());
+        adsr.setDecayTime(ampDecayDial.getModule());
+        adsr.setSustainLevel(ampSustainDial.getModule());
+        adsr.setReleaseTime(ampReleaseDial.getModule());
         adsr.setGate(gate);
         modules.add(adsr);
 
