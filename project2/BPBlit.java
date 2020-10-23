@@ -17,11 +17,7 @@ public class BPBlit extends Blit
 
     protected double bpblit(long tickCount)
         {
-//    	 double hz = Utils.valueToHz(getFrequencyMod().getValue());
-//         hz = Math.min(Math.max(1.0, hz), Config.NYQUIST_LIMIT); // clamp so we don't get INF below
-//         double p = Config.SAMPLING_RATE / hz;
-//         double val = super.tick(tickCount) - offPhaseBlit.tick(tickCount);
-//         return val;
+
             return offPhaseBlit.tick(tickCount) - blit(tickCount, phaseMod.getValue());
         }
 
