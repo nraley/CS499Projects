@@ -41,7 +41,7 @@ public class Filter extends Module
             }
             x[0] = x0;                          //line 17
             return sum;
-            
+
         //return this.input.getValue();     //placeholder return statement to get the ball rolling
         }
     }

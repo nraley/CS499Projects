@@ -28,7 +28,7 @@ public class LPF extends Filter
             b[1] = 0.5;
             a[0] = 0.1;     //feedback
             a[1] = 0.25;    //feedback
-            x0 = 0;         //current input
+            x0 = input.getValue();         //current input
             //only assigned b0, a[], b[]
             // more work needed, J, W, T, etc
         }
