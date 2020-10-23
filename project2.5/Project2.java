@@ -171,7 +171,8 @@ public class Project2 extends Synth
     	// Feed the Mul as the cutoff for a LOW PASS FILTER (also feed in the resonance)
     	// END NEW IN PROJECT 2.5
 
-        //Build low-pass filter
+        //Build low-pass filters
+
         LPF lowPassFilter = new LPF();
         lowPassFilter.setInput(mixer);
         lowPassFilter.setFrequencyMod(filterCutoffDial.getModule());

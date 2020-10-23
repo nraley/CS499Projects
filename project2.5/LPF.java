@@ -22,7 +22,15 @@ public class LPF extends Filter
 
     void updateFilter(double CUTOFF, double Q)
         {
-        // IMPLEMENT ME
+            //from lines 1-4 of algorithm 14 in book
+            b0 = 1.0;       //initial value
+            b[0] = 0.5;
+            b[1] = 0.5;
+            a[0] = 0.1;     //feedback
+            a[1] = 0.25;    //feedback
+            x0 = 0;         //current input
+            //only assigned b0, a[], b[]
+            // more work needed, J, W, T, etc
         }
         
     public LPF()
