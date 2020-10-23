@@ -25,6 +25,6 @@ public class Filter extends Module
         
         //// IMPLEMENT ME
         
-        return 0;
+        return this.input.getValue();
         }
     }

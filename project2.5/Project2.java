@@ -171,22 +171,29 @@ public class Project2 extends Synth
     	// Feed the Mul as the cutoff for a LOW PASS FILTER (also feed in the resonance)
     	// END NEW IN PROJECT 2.5
 
-        // Build a VCA controlled by the ADSR which gets its input from the mixer
+        //Build low-pass filter
+        LPF lowPassFilter = new LPF();
+        lowPassFilter.setInput(mixer);
+        lowPassFilter.setFrequencyMod(filterCutoffDial.getModule());
+        lowPassFilter.setResonanceMod(filterResonanceDial.getModule());
+        modules.add(lowPassFilter);
+
+        // Build a VCA controlled by the ADSR which gets its input from the filter
         Amplifier AAA = new Amplifier();
         AAA.setAmplitudeMod(adsr);
-        AAA.setInput(mixer);
+        AAA.setInput(lowPassFilter);
         modules.add(AAA);
         // Make an output box
         Box outputBox = new Box(BoxLayout.Y_AXIS);
         outputBox.setBorder(BorderFactory.createTitledBorder("Output"));
         outer.add(outputBox);
 
-        Dial dial = new Dial(1.0);
-        outputBox.add(dial.getLabelledDial("Gain"));
+        Dial outputDial = new Dial(1.0);
+        outputBox.add(outputDial.getLabelledDial("Gain"));
         // Add a Gain amplifier
         Amplifier gainAmp = new Amplifier();
         gainAmp.setInput(AAA);
-        gainAmp.setAmplitudeMod(dial.getModule());
+        gainAmp.setAmplitudeMod(outputDial.getModule());
         modules.add(gainAmp);
         // Add an oscilloscope
         Oscilloscope oscope = new Oscilloscope();
