@@ -46,4 +46,21 @@ public class LPF extends Filter
         updateFilter(cutoff, q);
         return super.tick(tickCount);
         }
+    private void Coefficients() {
+
+        double T        = Config.INV_SAMPLING_RATE;
+        double herz       = Utils.valueToHz(frequencyMod.getValue());
+        double w       = herz>0 ? 2*Math.PI*herz : 0.0001;
+        double Quo        = resonanceMod.getValue()*10 + Math.sqrt(0.5);
+        double M        = w*w*Quo*T*T;
+        double J        = 4*Quo + 2*w*T + M;
+        double bottom = 1/J;
+
+        this.b0   = bottom*M;                  // b0
+        this.b[0] = bottom*2*M;                // b1
+        this.b[1] = bottom*M;                  // b2
+        this.a[0] = bottom*(-8*Quo + 2*M);       // a1
+        this.a[1] = bottom*(4*Quo - 2*w*T + M); // a2
+
+    }
     }
