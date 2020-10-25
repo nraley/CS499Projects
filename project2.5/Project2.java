@@ -172,13 +172,25 @@ public class Project2 extends Synth
     	// END NEW IN PROJECT 2.5
 
         //Build low-pass filters
-
+		ADSR lpADSR = new ADSR();
+		lpADSR.setAttackTime(filterAttackDial.getModule());
+		lpADSR.setDecayTime(filterDecayDial.getModule());
+		lpADSR.setSustainLevel(filterSustainDial.getModule());
+		lpADSR.setReleaseTime(filterReleaseDial.getModule());
+		lpADSR.setGate(gate);
+		modules.add(lpADSR);
+		/* Tried to get the ADSR to multiply by the dial value to control the amount of cutoff but could not get it to sound correct
+		
+		Mul lpMul = new Mul();
+		lpMul.setMultiplier(filterCutoffDial.getModule());
+		lpMul.setInput(lpADSR);*/
+		
         LPF lowPassFilter = new LPF();
         lowPassFilter.setInput(mixer);
         lowPassFilter.setFrequencyMod(filterCutoffDial.getModule());
         lowPassFilter.setResonanceMod(filterResonanceDial.getModule());
         modules.add(lowPassFilter);
-
+		
         // Build a VCA controlled by the ADSR which gets its input from the filter
         Amplifier AAA = new Amplifier();
         AAA.setAmplitudeMod(adsr);

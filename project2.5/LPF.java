@@ -22,15 +22,20 @@ public class LPF extends Filter
 
     void updateFilter(double CUTOFF, double Q)
         {
-            //from lines 1-4 of algorithm 14 in book
-            b0 = 1.0;       //initial value
-            b[0] = 0.5;
-            b[1] = 0.5;
-            a[0] = 0.1;     //feedback
-            a[1] = 0.25;    //feedback
-            x0 = input.getValue();         //current input
-            //only assigned b0, a[], b[]
-            // more work needed, J, W, T, etc
+            //from lines 1-4 of algorithm 14 in book; coefficients for the algorithm
+        double T        = Config.INV_SAMPLING_RATE;
+        double herz       = Utils.valueToHz(frequencyMod.getValue());
+        double w       = herz>0 ? 2*Math.PI*herz : 0.0001;
+        double Quo        = resonanceMod.getValue()*10 + Math.sqrt(0.5);
+        double M        = w*w*Quo*T*T;
+        double J        = 4*Quo + 2*w*T + M;
+        double bottom = 1/J;
+
+        this.b0   = bottom*M;                  // b0
+        this.b[0] = bottom*2*M;                // b1
+        this.b[1] = bottom*M;                  // b2
+        this.a[0] = bottom*(-8*Quo + 2*M);       // a1
+        this.a[1] = bottom*(4*Quo - 2*w*T + M); // a2
         }
         
     public LPF()
@@ -46,21 +51,4 @@ public class LPF extends Filter
         updateFilter(cutoff, q);
         return super.tick(tickCount);
         }
-    private void Coefficients() {
-
-        double T        = Config.INV_SAMPLING_RATE;
-        double herz       = Utils.valueToHz(frequencyMod.getValue());
-        double w       = herz>0 ? 2*Math.PI*herz : 0.0001;
-        double Quo        = resonanceMod.getValue()*10 + Math.sqrt(0.5);
-        double M        = w*w*Quo*T*T;
-        double J        = 4*Quo + 2*w*T + M;
-        double bottom = 1/J;
-
-        this.b0   = bottom*M;                  // b0
-        this.b[0] = bottom*2*M;                // b1
-        this.b[1] = bottom*M;                  // b2
-        this.a[0] = bottom*(-8*Quo + 2*M);       // a1
-        this.a[1] = bottom*(4*Quo - 2*w*T + M); // a2
-
-    }
-    }
+    

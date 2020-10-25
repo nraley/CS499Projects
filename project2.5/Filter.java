@@ -22,26 +22,21 @@ public class Filter extends Module
 
     public double tick(long tickCount) 
         {
-            //what follows it taken from algorithm 14 from textbook
-            int N = a.length;
-            int M = b.length;
-            double sum = x0 * b0;           //A14 line 7
-            for (int n = 0; n < N; n++) {   //line 8
-                sum -= a[n] * y[n];         //line 9
-            }
-            for (int m = 0; m < M; m++) {   //line 10
-                sum += b[m] * x[m];         //line 11
-            }
-            for (int n = N - 1; n > 0; n--) {   //line 12
-                y[n] = y[n-1];                  //line 13
-            }
-            y[0] = sum;                         //line 14
-            for (int m = M -1; m > 0; m--) {    //line 15
-                x[m] = x[m-1];                  //line 16
-            }
-            x[0] = x0;                          //line 17
-            return sum;
+			 double x0 = input.getValue() - 0.5;                     // note change
+			// do sum
+			double sum = x0 * b0;
+			for(int n = 0; n < a.length; n++)
+				sum -= (a[n] * y[n]);
+			for(int m = 0; m < b.length; m++)
+				sum += (b[m] * x[m]);
+			// do shifts
+			for(int n = a.length - 1; n > 0; n--)
+				y[n] = y[n-1];
+			y[0] = sum;
+			for(int m = b.length - 1; m > 0; m--)
+				x[m] = x[m-1];
+			x[0] = x0;	
+			return sum + 0.5;                                               // note change
 
-        //return this.input.getValue();     //placeholder return statement to get the ball rolling
         }
     }
