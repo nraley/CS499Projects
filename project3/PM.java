@@ -1,4 +1,4 @@
-q/* 
+/*
  * Utility module that provides some common parameters for all modules inteded to be oscillators
  */
 public class PM extends Osc 
@@ -29,7 +29,7 @@ public class PM extends Osc
     
     public double tick(long tickCount) 
         {
-		hz = Utils.valueToHz(getFrequencyMod().getValue()) * relativeFrequency.getValue); //find freq of wave mul by the relativeFrequency
+		hz = Utils.valueToHz(getFrequencyMod().getValue()) * relativeFrequency.getValue(); //find freq of wave mul by the relativeFrequency
 		state = state+(hz*Config.INV_SAMPLING_RATE);
 			if(state  > 1){		//condition for reseting state
 				state = state - 1;
