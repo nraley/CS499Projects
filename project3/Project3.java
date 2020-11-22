@@ -12,7 +12,7 @@ public class Project3 extends Synth
 	Dial dials[][] = new Dial[4][4];	// Incoming modulation dial [To][From]
 	Dial[] outs = new Dial[4];			// Out dial
 
-    public PM buildOperator(int opNum, Box container) {
+		public PM buildOperator(int opNum, Box container, MidiModule midiMod, Module midiGate) {
     	// Make a box for the operator
 		Box opBox = new Box(BoxLayout.Y_AXIS);
 		opBox.setBorder(BorderFactory.createTitledBorder("Operator " + (opNum + 1)));
@@ -21,15 +21,21 @@ public class Project3 extends Synth
 		// Make the operator
 		PM operator = new PM();
 		modules.add(operator);
+		operator.setFrequencyMod(midiMod);
 
 		// Add Relative Frequency
 		Dial dial = new Dial(0.1);
 		opBox.add(dial.getLabelledDial("Relative Frequency"));
 		operator.setRelativeFrequency(dial.getModule());
+		modules.add(dial.getModule());
+		// control with MIDI CC
+		dial.attach(midiMod, opNum + 1);
+
 
 		// Add an ADSR
 		ADSR adsr = new ADSR();
 		modules.add(adsr);
+		adsr.setGate(midiGate);
 		operator.setOutputAmplitude(adsr);
 
 		// Add Attack Time, Decay Time, Sustain, Release Time
@@ -54,7 +60,7 @@ public class Project3 extends Synth
 		opBox.add(dial.getLabelledDial("Gain"));
 		Mul mul = new Mul();
 		modules.add(mul);
-		mul.setInput(operator);
+		mul.setInput(adsr);
 		mul.setMultiplier(dial.getModule());
 
 		// Add mixer dials
@@ -70,6 +76,9 @@ public class Project3 extends Synth
 		// Add an Out dial
 		outs[opNum] = new Dial(1.0);
 		opBox.add(outs[opNum].getLabelledDial("Out"));
+		modules.add(outs[opNum].getModule());
+		// control with MIDI CC
+		outs[opNum].attach(midiMod, opNum + 5);
 
 		return operator;
 	}
@@ -88,10 +97,10 @@ public class Project3 extends Synth
 		frame.setContentPane(outer);
 ;
     	//		Make the operators
-		PM op1 = buildOperator(0, outer);
-		PM op2 = buildOperator(1, outer);
-		PM op3 = buildOperator(2, outer);
-		PM op4 = buildOperator(3, outer);
+		PM op1 = buildOperator(0, outer, midimod, gate);
+		PM op2 = buildOperator(1, outer, midimod, gate);
+		PM op3 = buildOperator(2, outer, midimod, gate);
+		PM op4 = buildOperator(3, outer, midimod, gate);
 	
 		//	 	For each operator, add a Mixer to mix in incoming signals from all four operators
 		PM opArr[] = new PM[] {op1, op2, op3, op4};
