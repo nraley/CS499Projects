@@ -30,12 +30,12 @@ public class PM extends Osc
     public double tick(long tickCount) 
         {
 		hz = Utils.valueToHz(getFrequencyMod().getValue()) * relativeFrequency.getValue(); //find freq of wave mul by the relativeFrequency
-		state = state +(hz*Config.INV_SAMPLING_RATE); // x in equation on page 110
+		state = state+(hz*Config.INV_SAMPLING_RATE);
 			if(state  > 1){		//condition for reseting state
 				state = state - 1;
 			}
 		x = 2*Math.PI*state;
-		return outputAmplitude.getValue() * Utils.fastSin(x) + 0.5; // output sinwave with appropriate vol and pitch
+		return outputAmplitude.getValue() * Utils.fastSin(x); // output sinwave with appropriate vol and pitch
 		// IMPLEMENT ME
         // REMEMBER TO CENTER THE INCOMING MODULATION WAVE AND THE OUTGOING FINAL WAVE AROUND 0.5
         }
