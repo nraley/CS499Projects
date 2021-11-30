@@ -1,4 +1,3 @@
 # CS499Projects
-collab for cs 499 team :)))))))))))))
 
-big chungus travis scott burger keanu reeves reddit wholesome 100 despacito minecraft parody
+Repository for CS499 synthesizer projects, developed by Christopher Renfro and Nelson Raley.
